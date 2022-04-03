@@ -7,19 +7,20 @@ const makerPage = (req, res) => res.render('app');
 
 const makeDomo = async (req, res) => {
   if (!req.body.name || !req.body.age) {
-    return res.status(400).json({ error: 'Both name and age are required!' });
+    return res.status(400).json({ error: 'Name, age and height are required to create a Domo' });
   }
 
   const domoData = {
     name: req.body.name,
     age: req.body.age,
+    color: req.body.color,
     owner: req.session.account._id,
   };
 
   try {
     const newDomo = new Domo(domoData);
     await newDomo.save();
-    return res.status(201).json({ name: newDomo.name, age: newDomo.age });
+    return res.status(201).json({ name: newDomo.name, age: newDomo.age,  color: newDomo.color });
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {

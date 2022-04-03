@@ -4,6 +4,7 @@ module.exports = {
   entry: {
     app: './client/maker.jsx',
     login: './client/login.jsx',
+    movie: './client/movie.jsx',
   },
   module: {
     rules: [
@@ -22,6 +23,6 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'hosted'),
-    filename: '[name]bundle.js',
+    filename: '[name]Bundle.js',
   },
 };
