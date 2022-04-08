@@ -65,11 +65,11 @@ const LoginWindow = (props) => {
 const SignupWindow = (props) => {
     return (
         <form id='signupForm'
-        name='signupForm'
-        onSubmit={handleSignup}
-        action='/signup'
-        method='POST'
-        className='mainForm'
+            name='signupForm'
+            onSubmit={handleSignup}
+            action='/signup'
+            method='POST'
+            className='mainForm'
         >
             <label htmlFor='username'>Username: </label>
             <input id='user' type='text' name='username' placeholder='username' />
@@ -83,12 +83,21 @@ const SignupWindow = (props) => {
     );
 };
 
+const MovieWindow = (props) => {
+    return (
+        <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PcltCupJUuk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    )
+}
+
 const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
 
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
+    const movieButton = document.getElementById('movieButton');
 
     loginButton.addEventListener('click', (e) => {
         console.log('login button')
@@ -105,10 +114,18 @@ const init = async () => {
             document.getElementById('content'));
         return false;
     });
-    
+
+    movieButton.addEventListener('click', (e) => {
+        console.log('movie button');
+        e.preventDefault();
+        ReactDOM.render(
+            <MovieWindow />,
+            document.getElementById('content'));
+    })
+
     ReactDOM.render(<LoginWindow csrf={data.csrfToken} />,
-    document.getElementById('content'));
-    
+        document.getElementById('content'));
+
 
 };
 
